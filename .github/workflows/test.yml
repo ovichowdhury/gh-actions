@@ -1,0 +1,18 @@
+name: Test Project
+on:
+  push:
+    branches: main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code from Repo
+        uses: actions/checkout@v3
+      - name: Install Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install Dependency
+        run: npm ci
+      - name: Run Test
+        run: npm test
