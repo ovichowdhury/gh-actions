@@ -1,0 +1,20 @@
+name: Events Demo
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - main
+      - dev-*
+      - feat/**
+  push:
+    branches:
+      - main
+      - dev-*
+      - feat/**
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Console Event Details
+        run: ${{toJson(github.event)}}
