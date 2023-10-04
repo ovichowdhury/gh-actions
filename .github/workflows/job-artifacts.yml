@@ -1,0 +1,29 @@
+name: Project Artifacts
+on:
+  push:
+    branches: ["main"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the Code
+        uses: actions/checkout@v3
+      - name: Install Dependency
+        run: npm ci
+      - name: Run Test
+        run: npm run test
+  build:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Get the Code
+        uses: actions/checkout@v3
+      - name: Install Dependency
+        run: npm ci
+      - name: Build the Code
+        run: npm run build
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files
+          path: dist
