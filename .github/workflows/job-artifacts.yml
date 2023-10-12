@@ -5,6 +5,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: testing
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
     steps:
       - name: Get the Code
         uses: actions/checkout@v3

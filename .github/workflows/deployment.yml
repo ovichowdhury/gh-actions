@@ -7,6 +7,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: testing
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
     steps:
       - name: Get Code from Repo
         uses: actions/checkout@v3
