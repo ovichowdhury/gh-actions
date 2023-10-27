@@ -19,5 +19,5 @@ jobs:
         run: npm run build
       - name: Start the Server
         run: pm2 restart app
-      - name: Persist env variable
-        run: sudo echo "MONGODB_URI=$MONGODB_URI" >> /etc/environment
+      - name: Persist Env Variable
+        run: pwd
