@@ -18,4 +18,4 @@ jobs:
       - name: Build the Code
         run: npm run build
       - name: Start the Server
-        run: pm2 start dist/index.js --name app
+        run: pm2 restart app
