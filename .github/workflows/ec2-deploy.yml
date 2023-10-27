@@ -20,4 +20,4 @@ jobs:
       - name: Start the Server
         run: pm2 restart app
       - name: Persist env variable
-        run: echo "MONGODB_URI=$MONGODB_URI" >> /etc/environment
+        run: sudo echo "MONGODB_URI=$MONGODB_URI" >> /etc/environment
