@@ -1,0 +1,21 @@
+name: Deploy to EC2
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: self-hosted
+    environment: testing
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+    steps:
+      - name: Get the Code from Repo
+        uses: actions/checkout@v3
+      - name: Install Node Packages
+        run: npm ci
+      - name: Run the Test
+        run: npm run test
+      - name: Build the Code
+        run: npm run build
+      - name: Start the Server
+        run: pm2 start dist/index.js --name app
