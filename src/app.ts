@@ -5,17 +5,23 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/user", async (req, res) => {
+app.get("/_health", (_, res) => {
+  return res.status(200).json({
+    message: "Ok",
+  });
+});
+
+app.post("/user", async (req, res) => {
   await dbConnect();
   const user = new User({
-    name: "Bill",
-    email: "bill@initech.com",
-    avatar: "https://i.imgur.com/dM7Thhn.png",
+    name: req.body.name,
+    email: req.body.email,
+    avatar: req.body.avatar,
   });
   await user.save();
-  return res.status(200).json({
-    message: "Hello World V3",
-    user: user,
+  return res.status(201).json({
+    message: "Request Successful",
+    data: user,
   });
 });
 

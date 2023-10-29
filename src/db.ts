@@ -3,8 +3,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-console.log(process.env.MONGODB_URI);
-
 const MONGODB_URI: string = process.env.MONGODB_URI ?? "";
 
 if (MONGODB_URI === "") {
