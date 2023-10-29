@@ -1,0 +1,46 @@
+name: Execution Flow Check
+on:
+  push:
+    branches: [main]
+jobs:
+  test:
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Get the Code
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cache Dependency
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install Dependencies
+        run: npm ci
+      - name: Test Application
+        run: npm run test
+  build:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the Code
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Cache Dependency
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build Application
+        run: npm run build
