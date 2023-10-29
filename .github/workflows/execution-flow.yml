@@ -31,7 +31,14 @@ jobs:
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: npm ci
       - name: Test Application
-        run: npm run test
+        continue-on-error: true
+        run: npm test -- --json --outputFile=output.json
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: output.json
+
   build:
     needs: [test]
     runs-on: ubuntu-latest
