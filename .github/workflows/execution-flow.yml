@@ -2,8 +2,13 @@ name: Execution Flow Check
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+
 jobs:
   test:
+    environment: testing
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
     strategy:
       matrix:
         node-version: [14, 16, 18]
@@ -28,6 +33,9 @@ jobs:
   build:
     needs: [test]
     runs-on: ubuntu-latest
+    environment: testing
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
     steps:
       - name: Get the Code
         uses: actions/checkout@v3
