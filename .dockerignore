@@ -1,0 +1,25 @@
+# dependency
+node_modules
+
+# logs
+yarn-debug.log*
+yarn-error.log*
+npm-debug.log
+
+# docker config
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# git
+.git
+.gitignore
+.github
+
+# readme and license
+README.md
+LICENSE
+
+# editor
+.vscode
+.eslintcache
