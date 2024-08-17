@@ -7,7 +7,7 @@ app.use(express.json());
 
 app.get("/_health", (_, res) => {
   return res.status(200).json({
-    message: "Ok",
+    message: "Application is Running",
   });
 });
 
